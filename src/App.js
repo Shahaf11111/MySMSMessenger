@@ -1,23 +1,18 @@
-import logo from './logo.svg';
+import { Box, Typography } from "@mui/material";
+import NewMessage from "./components/NewMessage";
+import MessageHistory from "./components/MessageHistory";
+import AlertSnackbar from "./components/AlertSnackbar";
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <AlertSnackbar />
+      <Typography variant="h4" fontWeight="bold">MY SMS MESSENGER</Typography>
+      <Box display="flex">
+        <NewMessage />
+        <MessageHistory />
+      </Box>
     </div>
   );
 }
