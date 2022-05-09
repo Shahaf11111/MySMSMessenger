@@ -19,6 +19,7 @@ export default class MyClient {
             .then((res) => res.data)
             .then((res) => res.status === 200 ? { data: res.data } : { error: `Failed to send message - ${res.error}` })
             .catch((e) => ({ error: e.response.data.message }));
+        console.log(data);
         if (error) {
             throw new Error(error);
         }
