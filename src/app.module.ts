@@ -3,6 +3,8 @@ import { ConfigModule, ConfigService } from "@nestjs/config";
 import { MongooseModule } from "@nestjs/mongoose";
 import { ServerApiVersion } from "mongodb";
 import { TwilioModule } from "nestjs-twilio";
+import { ServeStaticModule } from "@nestjs/serve-static";
+import { join } from "path";
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { MessageModule } from "./message/message.module";
@@ -10,6 +12,10 @@ import { MessageModule } from "./message/message.module";
 @Module({
     imports: [
         ConfigModule.forRoot(),
+        ConfigModule.forRoot(),
+        ServeStaticModule.forRoot({
+            rootPath: join(__dirname, "..", "..", "fe", "build")
+        }),
         MongooseModule.forRootAsync({
             imports: [ConfigModule],
             useFactory: async (config: ConfigService) => ({

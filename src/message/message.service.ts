@@ -16,13 +16,13 @@ export class MessageService {
     async create(payload: CreateMessageDto): Promise<Message> {
         const message = new this.model(payload);
         await message.validate();
-        // await this.client.messages.create({
-        //     body: message.text,
-        //     from: message.from || process.env.TWILIO_PHONE_NUMBER,
-        //     to: message.to,
-        // }).catch((e) => {
-        //     throw new Error(`Twilio code ${e.code} - ${e.message}`);
-        // });
+        await this.client.messages.create({
+            body: message.text,
+            from: message.from || process.env.TWILIO_PHONE_NUMBER,
+            to: message.to,
+        }).catch((e) => {
+            throw new Error(`Twilio code ${e.code} - ${e.message}`);
+        });
         return await message.save();
     }
 
