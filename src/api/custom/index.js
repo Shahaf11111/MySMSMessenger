@@ -22,15 +22,14 @@ export default class MyClient {
         if (error) {
             throw new Error(error);
         }
-        const { from, to, body, date_created } = data;
-        message = new SMSMessage(from, to, body, date_created);
-        return { ...message, dateCreated: message.dateCreated.toUTCString() };
+        return { ...data, dateCreated: new Date(data.dateCreated).toUTCString() };
     }
 
-    async listMessages(author, recepient) {
+    async listMessages(from, to) {
         const { error, data } = await this.client
-            .get("/messages", { params: { author, recepient } })
-            .then((res) => res.status === 200 ? { data: res.data } : { error: "Failed to send message" })
+            .get("/message", { params: { from, to } })
+            .then((res) => res.data)
+            .then((res) => res.status === 200 ? { data: res.data } : { error: "Failed to retrieve messages" })
             .catch((e) => ({ error: e.response.data.message }));
         if (error) {
             throw new Error(error);
