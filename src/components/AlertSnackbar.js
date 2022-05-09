@@ -20,7 +20,7 @@ export default function AlertSnackbar() {
             anchorOrigin={{ vertical: "top", horizontal: "center" }}
             sx={{ boxShadow: 6 }}
         >
-            <Box display="flex">
+            <Box sx={{ width: "100%" }}>
                 <Alert
                     severity={alert.severity}
                     sx={{ width: "100%", alignItems: "center" }}

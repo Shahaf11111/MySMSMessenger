@@ -2,7 +2,7 @@ import * as React from "react";
 import { Typography, Box, TextField, Button, Paper, CircularProgress } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { sendMessage } from "../store/slices/messages";
-import twilioClient from "../api/twilio";
+import clientApi from "../api";
 import { error } from "../store/slices/alert";
 
 const MAX_MESSAGE_LENGTH = 250;
@@ -31,7 +31,7 @@ export default function NewMessage() {
     const handleSendMessage = async () => {
         try {
             setIsSubmitting(true);
-            const sentMessage = await twilioClient.sendMessage("16465863849", phoneNumber, text);
+            const sentMessage = await clientApi.sendMessage("16465863849", phoneNumber, text);
             dispatch(sendMessage(sentMessage));
         } catch (err) {
             dispatch(error(err.message));
